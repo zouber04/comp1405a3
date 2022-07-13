@@ -96,14 +96,21 @@ def get_total_customer_purchases(filename, customer):
     x = 0
     is_end = False
     num_purchases = get_total_purchases(filename)
-    while is_end:
+    while is_end == False:
+        if x > len(lines)-1:
+            is_end = True
+            break
+            
         line = lines[x].split()
-        if line[len(line)-1] == customer:
+        cust_name = line[len(line)-1]
+        
+        
+        if cust_name == customer:
             total_line = lines[x+5].split()
             count +=  int(total_line[len(total_line)-1])
-        x += 5
-        if x == len(lines)-1:
-            is_end = True
+            
+        x += 6
+        
              
     if count == 0: 
         print("No orders") 
@@ -167,8 +174,8 @@ def get_most_popular_product(filename):
 
 if __name__ == "__main__":
     filename = "test.txt"
-    customer = "Zouber"
-    num = get_most_popular_product(filename)
+    customer = "John"
+    num = get_total_customer_purchases(filename, customer)
     print(num)
         
     
